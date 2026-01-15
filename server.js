@@ -21,11 +21,13 @@ import statsRoutes from "./routes/stats.routes.js";
 
 dotenv.config();
 const app = express();
+app.set("trust proxy", 1);
+
 
 // ---------- CORS CONFIGURATION ----------
 app.use(
   cors({
-    origin: "http://localhost:3000", // frontend URL
+    origin: process.env.CLIENT_URL || "http://localhost:3000", // frontend URL
     credentials: true,               // allow cookies
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
@@ -40,7 +42,7 @@ app.use(express.urlencoded({ limit: "100mb", extended: true }));
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_URL || "http://localhost:3000",
     methods: ["GET", "POST"],
     credentials: true,
   },
