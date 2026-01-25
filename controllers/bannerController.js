@@ -14,6 +14,7 @@ export const getBanners = async (req, res, next) => {
 
 export const createBanner = async (req, res, next) => {
     try {
+        console.log("Creating banner. Body:", req.body);
         const { link, alt, order, isActive } = req.body;
 
         let imageUrl = "";

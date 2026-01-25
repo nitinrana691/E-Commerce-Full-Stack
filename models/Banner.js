@@ -5,6 +5,10 @@ const bannerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    mobileImage: {
+        type: String,
+        required: true
+    },
     link: {
         type: String,
         required: false
