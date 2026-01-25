@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get("/", getBanners);
 router.post("/", verifyAdmin, upload.fields([{ name: 'image', maxCount: 1 }, { name: 'mobileImage', maxCount: 1 }]), createBanner);
+router.put("/:id", verifyAdmin, upload.fields([{ name: 'image', maxCount: 1 }, { name: 'mobileImage', maxCount: 1 }]), updateBanner);
 router.delete("/:id", verifyAdmin, deleteBanner);
 
 export default router;
