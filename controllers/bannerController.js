@@ -3,6 +3,8 @@ import cloudinary from "../config/cloudinary.js";
 import { Readable } from "stream";
 import { createError } from "../utils/error.js";
 
+console.log("Loading bannerController.js...");
+
 export const getBanners = async (req, res, next) => {
     try {
         const banners = await Banner.find({ isActive: true }).sort({ order: 1 });

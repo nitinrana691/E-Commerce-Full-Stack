@@ -1,7 +1,9 @@
 import express from "express";
-import { getBanners, createBanner, deleteBanner } from "../controllers/bannerController.js";
+import { getBanners, createBanner, updateBanner, deleteBanner } from "../controllers/bannerController.js";
 import { verifyAdmin } from "../middleware/auth.js";
 import upload from "../middleware/upload.js";
+
+console.log("Loading bannerRoutes.js... updateBanner type:", typeof updateBanner);
 
 const router = express.Router();
 
