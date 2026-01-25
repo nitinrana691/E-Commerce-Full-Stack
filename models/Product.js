@@ -29,6 +29,17 @@ const productSchema = new mongoose.Schema(
                 message: "Maximum 6 add-on items allowed per product"
             }
         },
+        // New Specification Fields
+        styleNo: { type: String },
+        designNo: { type: String },
+        color: { type: String },
+        fabric: { type: String },
+        work: { type: String },
+        packContains: { type: String },
+        manufacturedBy: { type: String },
+        productSpeciality: { type: String },
+        styleTips: { type: String },
+        fitTips: { type: String },
     },
     { timestamps: true }
 );

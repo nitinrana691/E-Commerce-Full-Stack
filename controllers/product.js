@@ -35,7 +35,10 @@ import { Readable } from "stream";
 
 export const createProduct = async (req, res, next) => {
     try {
-        const { name, description, price, category, sizes, originalPrice, countInStock, inStock, addOnItems } = req.body;
+        const {
+            name, description, price, category, sizes, originalPrice, countInStock, inStock, addOnItems,
+            styleNo, designNo, color, fabric, work, packContains, manufacturedBy, productSpeciality, styleTips, fitTips
+        } = req.body;
 
         const imageUrls = [];
         if (req.files && req.files["images"] && req.files["images"].length > 0) {
@@ -136,6 +139,16 @@ export const createProduct = async (req, res, next) => {
             countInStock: Number(countInStock) || 0,
             inStock: inStock === "true" || inStock === true,
             addOnItems: parsedAddOnItems,
+            styleNo,
+            designNo,
+            color,
+            fabric,
+            work,
+            packContains,
+            manufacturedBy,
+            productSpeciality,
+            styleTips,
+            fitTips,
         });
 
         const savedProduct = await newProduct.save();
@@ -147,7 +160,10 @@ export const createProduct = async (req, res, next) => {
 
 export const updateProduct = async (req, res, next) => {
     try {
-        const { name, description, price, category, sizes, originalPrice, countInStock, inStock, addOnItems } = req.body;
+        const {
+            name, description, price, category, sizes, originalPrice, countInStock, inStock, addOnItems,
+            styleNo, designNo, color, fabric, work, packContains, manufacturedBy, productSpeciality, styleTips, fitTips
+        } = req.body;
 
         // Handle Images
         let updatedImages = [];
@@ -257,6 +273,16 @@ export const updateProduct = async (req, res, next) => {
             countInStock: countInStock !== undefined ? Number(countInStock) : undefined,
             inStock: inStock !== undefined ? (inStock === "true" || inStock === true) : undefined,
             addOnItems: parsedAddOnItems,
+            styleNo,
+            designNo,
+            color,
+            fabric,
+            work,
+            packContains,
+            manufacturedBy,
+            productSpeciality,
+            styleTips,
+            fitTips,
         };
 
         // Remove undefined fields to avoid overwriting with undefined
