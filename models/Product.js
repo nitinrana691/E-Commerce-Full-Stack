@@ -9,6 +9,7 @@ const productSchema = new mongoose.Schema(
         images: { type: [String], required: true },
         video: { type: String },
         category: { type: String, required: true },
+        subcategory: { type: String },
         sizes: { type: [String], default: ["XS", "S", "M", "L", "XL"] },
         inStock: { type: Boolean, default: true },
         countInStock: { type: Number, default: 0 },

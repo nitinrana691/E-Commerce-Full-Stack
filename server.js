@@ -19,6 +19,7 @@ import paymentRoutes from "./routes/payment.routes.js";
 import messageRoutes from "./routes/message.routes.js";
 import statsRoutes from "./routes/stats.routes.js";
 import bannerRoutes from "./routes/bannerRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -102,6 +103,7 @@ app.use("/api/payment", paymentRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/stats", statsRoutes);
 app.use("/api/banners", bannerRoutes);
+app.use("/api/categories", categoryRoutes);
 
 
 // // ---------- OPENROUTER AI CHAT ROUTE ----------
