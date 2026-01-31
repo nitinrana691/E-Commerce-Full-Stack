@@ -5,7 +5,8 @@ import {
     createProduct,
     updateProduct,
     deleteProduct,
-    getDistinctCategories
+    getDistinctCategories,
+    getDistinctSubcategories
 } from "../controllers/product.js";
 import { verifyAdmin } from "../middleware/auth.js";
 
@@ -13,6 +14,7 @@ const router = express.Router();
 
 router.get("/", getAllProducts);
 router.get("/categories", getDistinctCategories);
+router.get("/subcategories", getDistinctSubcategories);
 router.get("/:id", getProductById);
 
 import upload from "../middleware/upload.js";

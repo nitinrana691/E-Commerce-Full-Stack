@@ -36,7 +36,7 @@ import { Readable } from "stream";
 export const createProduct = async (req, res, next) => {
     try {
         const {
-            name, description, price, category, sizes, originalPrice, countInStock, inStock, addOnItems,
+            name, description, price, category, subcategory, sizes, originalPrice, countInStock, inStock, addOnItems,
             styleNo, designNo, color, fabric, work, packContains, manufacturedBy, productSpeciality, styleTips, fitTips
         } = req.body;
 
@@ -135,6 +135,7 @@ export const createProduct = async (req, res, next) => {
             images: imageUrls,
             video: videoUrl,
             category,
+            subcategory,
             sizes: (finalSizes && finalSizes.length > 0) ? finalSizes : ["XS", "S", "M", "L", "XL"],
             countInStock: Number(countInStock) || 0,
             inStock: inStock === "true" || inStock === true,
@@ -161,7 +162,7 @@ export const createProduct = async (req, res, next) => {
 export const updateProduct = async (req, res, next) => {
     try {
         const {
-            name, description, price, category, sizes, originalPrice, countInStock, inStock, addOnItems,
+            name, description, price, category, subcategory, sizes, originalPrice, countInStock, inStock, addOnItems,
             styleNo, designNo, color, fabric, work, packContains, manufacturedBy, productSpeciality, styleTips, fitTips
         } = req.body;
 
@@ -267,6 +268,7 @@ export const updateProduct = async (req, res, next) => {
             price: price !== undefined ? Number(price) : undefined,
             originalPrice: originalPrice !== undefined && originalPrice !== "" ? Number(originalPrice) : undefined,
             category,
+            subcategory,
             sizes: (finalSizes && finalSizes.length > 0) ? finalSizes : undefined,
             images: updatedImages.length > 0 ? updatedImages : undefined,
             video: updatedVideo,
@@ -326,7 +328,7 @@ export const getDistinctCategories = async (req, res, next) => {
             {
                 $group: {
                     _id: "$category",
-                    image: { $first: "$image" },
+                    image: { $first: { $arrayElemAt: ["$images", 0] } },
                     count: { $sum: 1 }
                 }
             },
@@ -340,6 +342,15 @@ export const getDistinctCategories = async (req, res, next) => {
             }
         ]);
         res.status(200).json(categories);
+    } catch (err) {
+        next(err);
+    }
+};
+
+export const getDistinctSubcategories = async (req, res, next) => {
+    try {
+        const subcategories = await Product.distinct("subcategory");
+        res.status(200).json(subcategories.filter(s => s)); // Filter out empty/null
     } catch (err) {
         next(err);
     }
