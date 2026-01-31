@@ -18,17 +18,6 @@ const orderSchema = new mongoose.Schema(
                     ref: "Product",
                     required: true,
                 },
-                size: { type: String },
-                stitchingDetails: {
-                    option: { type: String }, // 'Unstitched', 'Stitched'
-                    stitchingSize: { type: String },
-                    padding: { type: String }, // 'Yes', 'No'
-                    blouseDesign: { type: String }
-                },
-                sareeAddOns: {
-                    preDrape: { type: Boolean, default: false },
-                    petticoat: { type: Boolean, default: false }
-                },
             },
         ],
         shippingAddress: {
